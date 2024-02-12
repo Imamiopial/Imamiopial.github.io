@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Thin.ttf");
+    font-weight: 100;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Medium.otf");
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Semibold.ttf");
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SF-Pro-Display/SF-Pro-Display-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+.full-bleed {
+  box-shadow: 0 0 0 100vmax #0c0d11;
+
+  clip-path: inset(0 -100vmax) !important;
+}
+.text-shadow {
+  text-shadow: 2px 2px 0 #353535, 2px -2px 0 #353535, -2px 2px 0 #353535,
+    -2px -2px 0 #353535, 2px 0px 0 #353535, 0px 2px 0 #353535,
+    -2px 0px 0 #353535, 0px -2px 0 #353535;
+}
+.text-shadow:hover {
+  text-shadow: 2px 2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff,
+    -2px -2px 0 #ffffff, 2px 0px 0 #ffffff, 0px 2px 0 #ffffff,
+    -2px 0px 0 #ffffff, 0px -2px 0 #ffffff;
+}
+.button-div {
+  transform: translate3d(-1.5rem, 0px, 0px) scale3d(0.3, 0.3, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+.project-button:hover .button-div {
+  transform: translate3d(0rem, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+  transition: all 500ms;
+}
+.image-2 {
+  transform: translate3d(-2rem, 4rem, 0px) scale3d(0.5, 0.5, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+.project-button:hover .image-2 {
+  transform: translate3d(0rem, 0rem, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+  transition: all 500ms;
+}
+@layer utilities {
+  .section-padding {
+    @apply lg:px-[12.5rem] md:px-[11.5rem] sm:px-[3rem] px-[1.2rem];
+  }
+  .sub-section-padding {
+    @apply lg:px-[10rem] md:px-[10.5rem] sm:px-[2.5rem] px-[1.2rem];
+  }
+  .project-section-padding {
+    @apply lg:px-[7.5rem] md:px-[10.5rem] sm:px-[2.5rem] px-[1.2rem];
+  }
+  .sub-section-padding {
+    @apply xl:px-[11.5rem] lg:px-[10.5rem] md:px-[8rem] sm:px-[2.5rem] px-[1.2rem];
+  }
+  .bg-hover {
+    @apply hover:bg-white hover:text-black  transition-all ease-in-out duration-500;
+  }
+  .text-hover {
+    @apply hover:text-white transition-all ease-in-out duration-500;
+  }
+  .svg-hover {
+    @apply fill-gray_c-500 hover:fill-white transition-all ease-in-out duration-500;
+  }
+  .h-85dvh {
+    height: 85svh;
+  }
+  .slick-slide {
+    margin: 0 20px !important;
+  }
+  .slick-track {
+    display: flex !important;
+    gap: 20px !important;
+  }
+}
