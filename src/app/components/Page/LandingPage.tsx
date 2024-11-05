@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Lenis from "@studio-freight/lenis";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import StickyCursor from "@/app/components/cursor/StickyCursor";
 import PrimaryButton from "@/app/components/button/PrimaryButton";
 import React from "react";
@@ -31,7 +31,7 @@ export default function LandingPage() {
   const is2Xl = useMediaQuery("(min-width: 1561px)");
 
   /* paralax scroll */
-  console.log("isSm");
+  /* console.log("isSm");
   console.log(!isSm);
   console.log("isMd");
   console.log(!isMd);
@@ -40,8 +40,8 @@ export default function LandingPage() {
   console.log("isXl");
   console.log(!isXl);
   console.log("is2Xl");
-  console.log(!is2Xl);
-  const brandProjectRef = useRef(null);
+  console.log(!is2Xl); */
+  const brandProjectRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: brandProjectRef,
     offset: ["0 0", ".5 0"],
@@ -79,6 +79,28 @@ export default function LandingPage() {
     }
     /* console.log(actionElements); */
   };
+  const [paddingBottom, setPaddingBottom] = useState(0);
+
+  const translateRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const calculatePadding = () => {
+      if (translateRef.current) {
+        // Get the height of the element where translateY is applied
+        const elementHeight =
+          translateRef.current.getBoundingClientRect().height;
+
+        // Calculate padding based on the height and the translate value
+        const translateAmount = elementHeight * 0.11; // 10% of the element's height
+        setPaddingBottom(translateAmount);
+      }
+    };
+
+    calculatePadding();
+    window.addEventListener("resize", calculatePadding);
+    return () => window.removeEventListener("resize", calculatePadding);
+  }, []);
+
   return (
     <main
       ref={brandProjectRef}
@@ -95,26 +117,34 @@ export default function LandingPage() {
           <BrandSection addToRefs={addToRefs} />
         </motion.div>
 
-        <motion.div style={{ y: backgroundY }}>
+        <motion.div
+          ref={translateRef}
+          style={{
+            y: backgroundY,
+            paddingBottom: `${paddingBottom}px`,
+          }}
+          className=""
+          /* pb-[72vh]  lg:pb-[76px] 2xl:pb-[84vh] xl:pb-[68vh] */
+        >
           <AllProjectsSection addToRefs={addToRefs} />
-
-          {/* <OtherProjectSection /> */}
-          <div className="2xl:px-[10%]">
-            <div className=" sub-section-padding bg-black 2xl:px-[10%]">
-              <MotoTextSection
-                addToRefs={addToRefs}
-                text="Designing Experiences, Shaping Perceptions & Elevating Businesses"
-              />
-            </div>
-            <SlickSlider />
-            {/* <CoutesCardSection addToRefs={addToRefs} /> */}
-            <div className="sub-section-padding bg-black">
-              <GetInTouchSection addToRefs={addToRefs} />
-            </div>
-            {/* <PrimaryButton ref={stickyElement} /> */}
-            <Footer addToRefs={addToRefs} />
-          </div>
         </motion.div>
+
+        {/* <OtherProjectSection /> */}
+        <div className="2xl:px-[10%]">
+          <div className=" sub-section-padding bg-black 2xl:px-[10%]">
+            <MotoTextSection
+              addToRefs={addToRefs}
+              text="Designing Experiences, Shaping Perceptions & Elevating Businesses"
+            />
+          </div>
+          <SlickSlider />
+          {/* <CoutesCardSection addToRefs={addToRefs} /> */}
+          <div className="sub-section-padding bg-black">
+            <GetInTouchSection addToRefs={addToRefs} />
+          </div>
+          {/* <PrimaryButton ref={stickyElement} /> */}
+          <Footer addToRefs={addToRefs} />
+        </div>
       </div>
     </main>
   );

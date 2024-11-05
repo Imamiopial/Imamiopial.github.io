@@ -9,12 +9,13 @@ export default React.forwardRef(function Footer(props: IFooterProps, ref: any) {
   const refElement = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: refElement,
-    offset: ["start 0%", "end 100%"],
+    offset: ["start 20%", "end 100%"],
+    /* offset: ["-2 0", "0 0"], */
   });
-  const footerY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const footerY = useTransform(scrollYProgress, [0, 1], ["100%", "10%"]);
 
   const w = useTransform(scrollYProgress, (value) => {
-    const progress = `${100 - value * 100}%`;
+    const progress = `${value * 100}%`;
     /* if (value * 100 > 40) {
       return "100%";
     } */
