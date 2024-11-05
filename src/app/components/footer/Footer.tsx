@@ -7,12 +7,17 @@ export interface IFooterProps {
 
 export default React.forwardRef(function Footer(props: IFooterProps, ref: any) {
   const refElement = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
+  /* const { scrollYProgress } = useScroll({
     target: refElement,
     offset: ["start 20%", "end 100%"],
-    /* offset: ["-2 0", "0 0"], */
+  }); */
+  const { scrollYProgress } = useScroll({
+    target: refElement,
+    // Start tracking the scroll 20% before the footer enters the viewport and end when it is fully visible
+    offset: ["-10 0", "0 0"],
   });
-  const footerY = useTransform(scrollYProgress, [0, 1], ["100%", "10%"]);
+  /* offset: ["-2 0", "0 0"], */
+  const footerY = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
 
   const w = useTransform(scrollYProgress, (value) => {
     const progress = `${value * 100}%`;
@@ -51,7 +56,7 @@ export default React.forwardRef(function Footer(props: IFooterProps, ref: any) {
         >
           Services
         </h5>
-        <div className=" flex justify-between items-end 2xl:text-lg md:text-sm text-xs">
+        <div className=" flex justify-between gap-10 md:gap-0 flex-col md:flex-row md:items-end 2xl:text-lg md:text-sm text-xs">
           <ul className="grid grid-cols-2 gap-x-6 gap-y-2 leading-[21px] pl-3 ">
             <li
               ref={props.addToRefs}
